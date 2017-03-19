@@ -671,7 +671,7 @@ int Parser_TsPacketLen(char* fname,unsigned char *tslen,unsigned int *start_offs
 	
 	while(1)
 	{
-		c=fread(tsdata,1,1,fp);
+		c=fread(tsdata,1,1,fp);//every read the current poointer will be moved
 		if(tsdata[0]!= TS_HEAD_TAG)
 		{
 			offset++;
@@ -685,7 +685,7 @@ int Parser_TsPacketLen(char* fname,unsigned char *tslen,unsigned int *start_offs
 			printf("%s %d file read end!\n",__FUNCTION__,__LINE__);
 			return -1;
 		}
-		if(tsdata[0] == data[PACKET_188LEN-1])
+		if(tsdata[0] == data[PACKET_188LEN-1])//so here is 188-1
 		{
 			memset(data,0,PACKET_188LEN);
 			c=fread(data,PACKET_188LEN,1,fp);

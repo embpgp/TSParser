@@ -50,7 +50,7 @@ static int Parser_TsPacketGet(char* filedata,char *label,TsPacket_Operate_S *inf
 		str_len = MAX_STRBUFF_LEN -1;
 	}
 	
-	memcpy(strbuff, equal + 1, str_len);
+	memcpy(strbuff, equal + 1, str_len);//calc the param and parser 
 	Parser_TsPacketLog(DISPLAY_VALID,"%s %d strbuff : %s in cfgfile\n",__FUNCTION__,__LINE__,strbuff);
 	if(memcmp(label, TSPACKET_OPERATE, strlen(TSPACKET_OPERATE))==0)
 	{
@@ -93,10 +93,11 @@ static int Parser_TsPacketGet(char* filedata,char *label,TsPacket_Operate_S *inf
 				break;
 			}
 			memcpy(strpid,strbuff,str_len);
+			//it can be majorization....
 			memmove(strbuff,ptr+1,strlen(strbuff)-str_len+1);
 			for(i = 0;i<MAX_TS_PIDNUMBER;i++)
 			{
-				if(info->pid[i] == 0xFFFF)
+				if(info->pid[i] == 0xFFFF)//if not be busy ,set it
 				{
 					info->pid[i] = atol(strpid);
 					Parser_TsPacketLog(DISPLAY_VALID,"%s %d pid is %d in cfgfile\n",__FUNCTION__,__LINE__,info->pid[i]);

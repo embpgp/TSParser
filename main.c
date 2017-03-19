@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
 	while ((c = getopt(argc,argv,"o:i:dp:g:c:")) != -1){
 		switch (c){
 			case 'i':
-				filename = optarg;
+				filename = optarg; //optarg will pointer the '-' arg 
 				break;
 			case 'o':
 				outfile = optarg;
@@ -78,8 +78,15 @@ int main(int argc, char* argv[])
 		usage(argv[0]);
 		return 1;
 	}
+	//the pid is short type,so it must be "*2" when use the 'char*'
 	memset((unsigned char*)(info.pid),0xFF,MAX_TS_PIDNUMBER*2);
-	
+	//keep the bit on effective range,
+	//The DEFAULT_DISPLAYPSI set the DISPLAY_VALID | EIT_ACTUAL_VALID | \
+	//TOT_VALID |  BAT_VALID |  SDT_ACTUAL_VALID | \
+	//#define PAT_VALID				(0x00000001)
+	//#define PMT_VALID				(0x00000002)
+	//#define CAT_VALID				(0x00000004)
+	//#define NIT_ACTUAL_VALID		(0x00000008)
 	psi_type &= DEFAULT_DISPLAYPSI;
 	info.operate_type |= psi_type;
 	Parser_SetDisplayTagInfo(info.operate_type);
