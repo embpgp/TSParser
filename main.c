@@ -98,7 +98,7 @@ int main(int argc, char* argv[])
 			printf("Parser_TsPacketCfg error !\n");
 		}
 	}
-	if(DISPLAY_VALID != (psi_type&DEFAULT_DISPLAYPSI))
+	if(DISPLAY_VALID != (psi_type & DISPLAY_VALID)) //I think it should be
 	{
 		info.operate_type &= ~DEFAULT_DISPLAYPSI;
 		info.operate_type |= psi_type;
